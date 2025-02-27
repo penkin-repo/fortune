@@ -1,0 +1,21 @@
+{
+  "name": "main",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.0.9",
+    "astro": "^5.3.1",
+    "astro-typograf": "^2.1.0",
+    "keen-slider": "^6.8.6",
+    "sharp": "^0.33.5",
+    "tailwindcss": "^4.0.9",
+    "unified": "^10.1.2",
+    "unist-util-visit": "^4.1.2"
+  }
+}

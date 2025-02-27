@@ -1,0 +1,49 @@
+@import "tailwindcss";
+@import "./slider.css";
+@import '../../node_modules/keen-slider/keen-slider.min.css';
+
+/* hero */
+.hero-section {
+  background-size: cover;
+  background-position: center;
+  animation: zoom 30s infinite;
+}
+
+@keyframes zoom {
+  0% {
+    background-size: 100%;
+
+  }
+  50% {
+    background-size: 150%;
+  }
+  100% {
+    background-size: 100%;
+  }
+}
+
+.faq-item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.contact-section {
+  background: linear-gradient(to bottom, #1a1a1a, #2d2d2d);
+}
+
+.faq-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out;
+}
+
+.faq-content.open {
+  max-height: 500px;
+  transition: max-height 0.8s ease-in;
+}
+
+.mobile-menu {
+  background-color: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+

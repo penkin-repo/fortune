@@ -1,0 +1,56 @@
+---
+import { getImage } from "astro:assets";
+import heroBackground from "../assets/hero.jpg";
+import { lazy } from "astro:schema";
+
+const optimizedHeroBackground = await getImage({
+  src: heroBackground,
+  format: "avif",
+  width: 1400,
+  // widths: [240, 540, 720], 
+  // sizes: `(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px`,
+  decoding: "async",
+  alt: "Изображение карт Таро",
+});
+
+---
+
+<section
+  data-name="hero"
+  class="hero-section h-screen flex items-center justify-center text-center text-white"
+  style={`background-image: linear-gradient(174deg, rgba(0,0,0,0.5242471988795518) 0%, rgba(15,1,1,0.6811099439775911) 100%), 
+		url(${optimizedHeroBackground.src});`}
+>
+  <div data-name="hero-content" class="container mx-auto px-6">
+    <h1
+      data-name="hero-title"
+      class="text-5xl md:text-6xl font-bold mb-8 mx-auto max-w-lg ibm-plex-serif-regular"
+    >
+      Гадание на&nbsp;картах Таро в&nbsp;Архангельске
+    </h1>
+    <!--  -->
+    <p
+      data-name="hero-subtitle"
+      class="text-xl md:text-2xl mb-12 max-w-lg mx-auto"
+    >
+    Таролог, Рунолог, Мастер энергетических практик и работы с подсознанием.
+    </p>
+    <div
+      data-name="hero-buttons"
+      class="flex flex-col md:flex-row justify-center gap-4"
+    >
+      <a
+        href="#readings"
+        class="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-full text-lg transition duration-300"
+      >
+        Узнать больше
+      </a>
+      <a
+        href="#contact"
+        class="border-2 border-white hover:bg-white hover:text-black px-8 py-3 rounded-full text-lg transition duration-300"
+      >
+        Связаться
+      </a>
+    </div>
+  </div>
+</section>

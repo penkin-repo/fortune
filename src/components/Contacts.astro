@@ -1,0 +1,55 @@
+---
+// const whatsappNumber = "+79210729431"; // Replace with actual number
+const whatsappNumber = "+79022857038"; // Replace with actual number
+const whatsappMessage = "Здравствуйте! Я хочу записаться на сеанс";
+// const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+const whatsappLink = `https://api.whatsapp.com/send/?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)}&type=phone_number&app_absent=0`;
+---
+
+<section id="contact" data-name="contact" class="contact-section py-20">
+  <div data-name="contact-container" class="container mx-auto px-6">
+    <h2
+      data-name="contact-title"
+      class="text-4xl font-bold text-center text-white mb-16 ibm-plex-serif-medium"
+    >
+      Свяжитесь со мной
+    </h2>
+    <div data-name="contact-content" class="max-w-2xl mx-auto text-center">
+      <div data-name="contact-info" class="text-white space-y-8">
+        <div class="space-y-4">
+          <p class="flex items-center justify-center">
+            <i class="fas fa-phone mr-4 text-purple-400"></i>
+            <a href="tel:+79210729431" class="hover:text-purple-400">8 921 072-94-31</a> <span class="ml-2">Мария</span>
+          </p>
+          <!-- <p class="flex items-center justify-center">
+            <i class="fas fa-envelope mr-4 text-purple-400"></i>
+            tarot@example.com
+          </p> -->
+          <p class="flex items-center justify-center">
+            <i class="fas fa-map-marker-alt mr-4 text-purple-400"></i>
+            Архангельск, Россия
+          </p>
+        </div>
+
+        <a
+          href={whatsappLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg transition duration-300 text-lg"
+        >
+          <i class="fab fa-whatsapp text-2xl mr-3"></i>
+          Написать в WhatsApp
+        </a>
+        <!-- social links -->
+        <!-- <div class="flex justify-center space-x-6 mt-8">
+          <a href="#" class="text-white hover:text-purple-400 transition">
+            <i class="fab fa-telegram text-3xl"></i>
+          </a>
+          <a href="#" class="text-white hover:text-purple-400 transition">
+            <i class="fab fa-instagram text-3xl"></i>
+          </a>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</section>

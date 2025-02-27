@@ -1,0 +1,79 @@
+---
+const faqItems = [
+  {
+    question: "Какие вопросы предсказателю, тарологу, можно задавать, а на какие вопросы получить ответы нельзя?",
+    answer:
+      "Обращаясь для получения предсказательных услуг к нам, вы можете задавать любые вопросы! У нас нет ограничений по темам или направлениям консультирования. Если вопрос задан по существу и является актуальным, то есть, важен для вас и связан с реальными событиями или обстоятельствами вашей жизни — на него всегда можно ответить при помощи подходящих астрологических или тарологических и оракульных техник.",
+  },
+  {
+    question: "Сколько длится сеанс?",
+    answer:
+      "Стандартная консультация длится около 60 минут, но может варьироваться в зависимости от сложности вопроса.",
+  },
+  {
+    question: "Можно ли получить консультацию онлайн?",
+    answer:
+      "Да, консультации проводятся как очно, так и онлайн через видеосвязь.",
+  },
+  {
+    question: "Какие данные нужно предоставить тарологу или астрологу для проведения сеанса",
+    answer:
+      "Если ваш вопрос касается  семейных или любовных отношений — необходимо приложить фото, на котором вы с партнером вместе. Это важный момент! Срок давности снимка не очень категоричен, но лучше присылать более актуальные, то есть, свежие фотографии!",
+  },
+];
+---
+
+<section id="faq" data-name="faq" class="py-20 bg-gray-900">
+  <div data-name="faq-container" class="container mx-auto px-6">
+    <h2
+      data-name="faq-title"
+      class="text-4xl font-bold text-center text-white mb-16 ibm-plex-serif-medium"
+    >
+      Частые вопросы
+    </h2>
+    <div data-name="faq-list" class="max-w-3xl mx-auto">
+      {
+        faqItems.map((item) => (
+          <div data-name="faq-item" class="faq-item mb-4">
+            <button class="w-full text-left px-6 py-4 flex justify-between items-center text-white hover:text-purple-400 transition-colors cursor-pointer">
+              <span class="text-lg font-medium">{item.question}</span>
+              <i
+                class={`fas fa-chevron-down transition-transform duration-300`}
+              />
+            </button>
+            <div class="faq-content">
+              <div class="px-6 py-4 text-gray-400">{item.answer}</div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  const faqItems = document.querySelectorAll('[data-name="faq-item"]');
+
+  faqItems!.forEach((item) => {
+    const button = item.querySelector("button") as HTMLButtonElement;
+    const content = item.querySelector(".faq-content") as HTMLElement;
+    const icon = item.querySelector("i") as HTMLElement;
+
+    button.addEventListener("click", () => {
+
+      // Закрываем все открытые элементы
+        faqItems.forEach((otherItem) => {
+        if (otherItem !== item) {
+          // otherItem.querySelector(".faq-content").classList.remove("open");
+          // otherItem.querySelector("i").classList.remove("fa-chevron-up");
+          // otherItem.querySelector("i").classList.add("fa-chevron-down");
+        }
+      });
+      
+      
+      content.classList.toggle("open");
+      icon.classList.toggle("fa-chevron-up");
+      icon.classList.toggle("fa-chevron-down");
+    });
+  });
+</script>

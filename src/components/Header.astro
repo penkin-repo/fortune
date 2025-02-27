@@ -1,0 +1,79 @@
+---
+const menuLinks = [
+    { name: 'Услуги', href: '#readings' },
+    { name: 'Отзывы', href: '#testimonials' },
+    { name: 'Вопросы', href: '#faq' },
+    { name: 'Контакты', href: '#contact' },
+]
+---
+
+<div data-name="header-wrapper">
+    <header data-name="header"
+            class="fixed w-full bg-black/50 blur-mmd z-40 transition-transform duration-300">
+        <nav data-name="nav" class="container mx-auto px-6 py-4">
+            <div data-name="nav-content" class="flex justify-between items-center">
+                <a href="/" data-name="logo" class="text-white text-2xl font-bold z-50 relative ibm-plex-serif-medium">
+                    <i class="fas fa-moon mr-2"></i>
+                    Гадание и помощь
+                </a>
+
+                <button data-name="mobile-menu-button" class="md:hidden cursor-pointer text-white z-50 relative"
+                        aria-label="Toggle menu">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+
+                <div data-name="desktop-nav-links" class="hidden md:flex space-x-8">
+                    {menuLinks.map((link) => (
+                        <a href={link.href} class="text-white hover:text-purple-400 transition">{link.name}</a>
+                    ))}
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div data-name="mobile-menu"
+         class="mobile-menu fixed inset-0 z-30 transition-opacity duration-300 md:hidden opacity-0 invisible">
+        <div class="flex flex-col items-center justify-center h-full space-y-8">
+            {menuLinks.map((link) => (
+                <a href={link.href} class="text-white text-2xl hover:text-purple-400 transition">{link.name}</a>
+            ))}
+        </div>
+    </div>
+</div>
+
+<script>
+    const header = document.querySelector('[data-name="header"]') as HTMLElement;
+    const mobileMenuButton = document.querySelector('[data-name="mobile-menu-button"]') as HTMLButtonElement;
+    const mobileMenu = document.querySelector('[data-name="mobile-menu"]') as HTMLElement;
+    const mobileMenuLinks = mobileMenu!.querySelectorAll('a') as NodeListOf<HTMLAnchorElement>;
+
+    let isVisible = true;
+    let isMenuOpen = false;
+
+    function toggleHeaderVisibility() {
+        isVisible = window.scrollY < 100;
+        header!.style.transform = isVisible ? 'translateY(0)' : 'translateY(-100%)';
+    }
+
+    function toggleMenu() {
+        isMenuOpen = !isMenuOpen;
+        mobileMenu.classList.toggle('opacity-100', isMenuOpen);
+        mobileMenu.classList.toggle('visible', isMenuOpen);
+        mobileMenu.classList.toggle('opacity-0', !isMenuOpen);
+        mobileMenu.classList.toggle('invisible', !isMenuOpen);
+        mobileMenuButton.querySelector('i')!.classList.toggle('fa-bars', !isMenuOpen);
+        mobileMenuButton.querySelector('i')!.classList.toggle('fa-times', isMenuOpen);
+    }
+
+    function closeMenu() {
+        isMenuOpen = false;
+        mobileMenu.classList.remove('opacity-100', 'visible');
+        mobileMenu.classList.add('opacity-0', 'invisible');
+        mobileMenuButton.querySelector('i')!.classList.remove('fa-times');
+        mobileMenuButton.querySelector('i')!.classList.add('fa-bars');
+    }
+
+    window.addEventListener('scroll', toggleHeaderVisibility);
+    mobileMenuButton.addEventListener('click', toggleMenu);
+    mobileMenuLinks.forEach(link => link.addEventListener('click', closeMenu));
+</script>

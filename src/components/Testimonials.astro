@@ -1,0 +1,183 @@
+---
+import slide1 from "../assets/slide1.png";
+import slide2 from "../assets/slide2.png";
+import slide3 from "../assets/slide3.png";
+import slide4 from "../assets/slide1.png";
+import slide5 from "../assets/slide2.png";
+import slide6 from "../assets/slide3.png";
+
+import { Image } from "astro:assets";
+
+const testimonials = [
+  {
+    image: slide1,
+    alt: "Отзыв клиента",
+  },
+  {
+    image: slide2,
+    alt: "Отзыв клиента",
+  },
+  {
+    image: slide3,
+    alt: "Отзыв клиента",
+  },
+  {
+    image: slide4,
+    alt: "Отзыв клиента",
+  },
+  {
+    image: slide5,
+    alt: "Отзыв клиента",
+  },
+  {
+    image: slide6,
+    alt: "Отзыв клиента",
+  },
+];
+---
+
+<section id="testimonials" data-name="testimonials" class="py-20 bg-gray-800">
+  <div
+    data-name="testimonials-container"
+    class="container mx-auto px-6 max-w-4xl"
+  >
+    <h2
+      data-name="testimonials-title"
+      class="text-4xl font-bold text-center text-white mb-16 ibm-plex-serif-medium"
+    >
+      Отзывы
+    </h2>
+
+    <div id="main-slider" class="keen-slider">
+      {
+        testimonials.map((item, index) => (
+          <div class="keen-slider__slide cursor-pointer overflow-hidden aspect-[9/20]">
+            <Image
+              src={item.image}
+              widths={[240, 540, 720]}
+              sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px`}
+              alt={item.alt}
+              format="avif"
+              class="w-full object-contain rounded-lg shadow-xl sm:object-cover"
+            />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  import KeenSlider from "keen-slider";
+  // @ts-ignore
+  function navigation(slider: any) {
+    let wrapper: any, dots: any, arrowLeft: any, arrowRight: any;
+
+    function markup(remove: any) {
+      wrapperMarkup(remove);
+      dotMarkup(remove);
+      arrowMarkup(remove);
+    }
+
+    function removeElement(elment: any) {
+      elment.parentNode.removeChild(elment);
+    }
+    function createDiv(className: any) {
+      var div = document.createElement("div");
+      var classNames = className.split(" ");
+      classNames.forEach((name: any) => div.classList.add(name));
+      return div;
+    }
+
+    function arrowMarkup(remove: any) {
+      if (remove) {
+        removeElement(arrowLeft);
+        removeElement(arrowRight);
+        return;
+      }
+      arrowLeft = createDiv("arrow arrow--left");
+      arrowLeft.addEventListener("click", () => slider.prev());
+      arrowRight = createDiv("arrow arrow--right");
+      arrowRight.addEventListener("click", () => slider.next());
+
+      wrapper.appendChild(arrowLeft);
+      wrapper.appendChild(arrowRight);
+    }
+
+    function wrapperMarkup(remove: any) {
+      if (remove) {
+        var parent = wrapper.parentNode;
+        while (wrapper.firstChild)
+          parent.insertBefore(wrapper.firstChild, wrapper);
+        removeElement(wrapper);
+        return;
+      }
+      wrapper = createDiv("navigation-wrapper");
+      slider.container.parentNode.appendChild(wrapper);
+      wrapper.appendChild(slider.container);
+    }
+
+    function dotMarkup(remove: any) {
+      if (remove) {
+        removeElement(dots);
+        return;
+      }
+      dots = createDiv("dots");
+      slider.track.details.slides.forEach((_e, idx) => {
+        var dot = createDiv("dot");
+        dot.addEventListener("click", () => slider.moveToIdx(idx));
+        dots.appendChild(dot);
+      });
+      wrapper.appendChild(dots);
+    }
+
+    function updateClasses() {
+      var slide = slider.track.details.rel;
+      slide === 0
+        ? arrowLeft.classList.add("arrow--disabled")
+        : arrowLeft.classList.remove("arrow--disabled");
+      slide === slider.track.details.slides.length - 1
+        ? arrowRight.classList.add("arrow--disabled")
+        : arrowRight.classList.remove("arrow--disabled");
+      Array.from(dots.children).forEach(function (dot: any, idx) {
+        idx === slide
+          ? dot.classList.add("dot--active")
+          : dot.classList.remove("dot--active");
+      });
+    }
+
+    slider.on("created", () => {
+      markup();
+      updateClasses();
+    });
+    slider.on("optionsChanged", () => {
+      console.log(2);
+      markup(true);
+      markup();
+      updateClasses();
+    });
+    slider.on("slideChanged", () => {
+      updateClasses();
+    });
+    slider.on("destroyed", () => {
+      markup(true);
+    });
+  }
+
+  var slider = new KeenSlider(
+    "#main-slider",
+    {
+      breakpoints: {
+        "(min-width: 640px)": {
+          slides: { perView: 3, spacing: 5 },
+        },
+        "(min-width: 1000px)": {
+          slides: { perView: 4, spacing: 10 },
+        },
+      },
+      slides: { perView: 1 },
+      loop: true,
+    },
+    [navigation]
+  );
+</script>

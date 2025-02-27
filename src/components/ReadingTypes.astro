@@ -1,0 +1,63 @@
+---
+const readings = [
+  {
+    title: "Любовная магия",
+    description:
+      "Узнайте о своей личной жизни, отношениях и любовных перспективах",
+    icon: "fa-heart",
+  },
+  {
+    title: "Талисманы",
+    description: "Получите ответы о карьерном росте и финансовом благополучии",
+    icon: "fa-briefcase",
+  },
+  {
+    title: "Оберег на удачу",
+    description: "Комплексный анализ всех сфер жизни и будущих перспектив",
+    icon: "fa-star",
+  },
+  {
+    title: "Снятие негатива",
+    description: "Детальный анализ конкретной ситуации и советы по её решению",
+    icon: "fa-compass",
+  },
+  {
+    title: "Помощь в бизнесе",
+    description: "Детальный анализ конкретной ситуации и советы по её решению",
+    icon: "fa-compass",
+  },
+  {
+    title: "Личная жизнь и семья",
+    description: "Детальный анализ конкретной ситуации и советы по её решению",
+    icon: "fa-compass",
+  },
+  {
+    title: "Расшифровка снов",
+    description: "Детальный анализ конкретной ситуации и советы по её решению",
+    icon: "fa-compass",
+  },
+  {
+    title: "Психологическое здоровье",
+    description: "Детальный анализ конкретной ситуации и советы по её решению",
+    icon: "fa-compass",
+  },
+];
+---
+
+<section id="readings" data-name="readings" class="py-20 bg-gray-900">
+  <div data-name="readings-container" class="container mx-auto px-6">
+      <h2 data-name="readings-title" class="text-4xl font-bold text-center text-white mb-16 ibm-plex-serif-medium">
+          Виды раскладов
+      </h2>
+      <div data-name="readings-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {readings.map((reading) => (
+              <div data-name="reading-card" 
+                   class="bg-gray-800 p-8 rounded-lg text-center transform hover:scale-105 transition duration-300">
+                  <i class={`fas ${reading.icon} text-4xl text-purple-500 mb-6`}></i>
+                  <h3 class="text-xl font-bold text-white mb-4">{reading.title}</h3>
+                  <p class="text-gray-400">{reading.description}</p>
+              </div>
+          ))}
+      </div>
+  </div>
+</section>
